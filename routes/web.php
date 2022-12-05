@@ -23,11 +23,12 @@ Route::get('/', [FirstController::class, 'index']);
 Route::prefix('admin')->group(function (){
     Route::get('/', [DashboardController::class, 'index']);
     Route::resource('categories', CategoryController::class)
-    ->except('show');
+        ->except('show');
     Route::resource('products', ProductController::class)
         ->except('show');
 });
 //Route::get('/admin', [DashboardController::class, 'index']);
+
 
 Auth::routes();
 

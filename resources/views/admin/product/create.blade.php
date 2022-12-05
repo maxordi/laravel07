@@ -55,7 +55,7 @@
                                     <label class="col-md-12">Category_id</label>
                                     <div class="col-md-12">
                                         <input type="text" name="category_id"
-                                                class="form-control form-control-line">
+                                               class="form-control form-control-line">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -117,10 +117,11 @@
         <!-- ============================================================== -->
         <!-- ============================================================== -->
         <!-- footer -->
+
         <!-- ============================================================== -->
         <footer class="footer text-center">
             All Rights Reserved by Xtreme Admin. Designed and Developed by <a
-                    href="https://www.wrappixel.com">WrapPixel</a>.
+                href="https://www.wrappixel.com">WrapPixel</a>.
         </footer>
         <!-- ============================================================== -->
         <!-- End footer -->
