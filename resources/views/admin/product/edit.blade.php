@@ -1,3 +1,4 @@
+@endsection
 @extends('layouts.my')
 
 @section('content')

@@ -55,22 +55,22 @@
                                 </thead>
                                 <tbody>
                                 @foreach($product as $producted)
-                                <tr>
-                                    <td>{{$producted->id}}</td>
-                                    <td>{{$producted->name}}</td>
-                                    <td>{{$producted->category_id}}</td>
-                                    <td>{{$producted->price}}</td>
-                                    <td>{{$producted->img}}</td>
-                                    <td>{{$producted->status}}</td>
-                                    <td>{{$producted->description}}</td>
-                                    <td>
-                                        <a href="{{ route('products.edit', ['product'=> $producted->id]) }}" class="label label-danger">Edit</a>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td>{{$producted->id}}</td>
+                                        <td>{{$producted->name}}</td>
+                                        <td>{{$producted->category_id}}</td>
+                                        <td>{{$producted->price}}</td>
+                                        <td>{{$producted->img}}</td>
+                                        <td>{{$producted->status}}</td>
+                                        <td>{{$producted->description}}</td>
+                                        <td>
+                                            <a href="{{ route('products.edit', ['product'=> $producted->id]) }}" class="label label-danger">Edit</a>
+                                        </td>
+                                    </tr>
                                 @endforeach
                                 </tbody>
                             </table>
-                           {!! $product->links('vendor.pagination.bootstrap-5') !!}
+                            {!! $product->links('vendor.pagination.bootstrap-5') !!}
                         </div>
                     </div>
                 </div>
