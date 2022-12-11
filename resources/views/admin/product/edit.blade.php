@@ -42,22 +42,25 @@
                     <div class="card">
                         <div class="card-body">
                             <form class="form-horizontal form-material mx-2"
-                                  method="post" action="{{route('products.store')}}">
+                                  method="post" action="{{route('products.update',['product'=>$product->id])}}">
                                 @csrf
+                                @method('PUT')
                                 <div class="form-group">
                                     <label class="col-md-12">Name</label>
                                     <div class="col-md-12">
-                                        <input type="text" name="Name"
+                                        <input type="text" name="name"
                                                class="form-control form-control-line"
-                                               value="<?= $product->name ?>">
+                                               value="{{$product->name}}">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-12">Category_id</label>
+                                    <label class="col-md-12">Category</label>
                                     <div class="col-md-12">
-                                        <input type="text" name="category_id"
-                                               class="form-control form-control-line"
-                                               value="<?= $product->category_id ?>">
+                                        <select name="category_id" class="form-control form-control-line">
+                                            @foreach($categories as $category)
+                                                <option value="{{$category->id}}" @selected($category->id ==$product->category_id)>{{$category->name}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -65,7 +68,7 @@
                                     <div class="col-md-12">
                                         <input type="text" name="price"
                                                class="form-control form-control-line"
-                                               value="<?= $product->price ?>">
+                                               value="{{$product->price}}">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -73,24 +76,23 @@
                                     <div class="col-md-12">
                                         <input type="file" name="img"
                                                class="form-control form-control-line"
-                                               value="<?= $product->img ?>">
+                                               value="{{$product->img}}">
                                     </div>
 
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-12">Status</label>
-                                    <div class="col-md-12">
-                                        <input type="text" name="status"
-                                               class="form-control form-control-line"
-                                               value="<?= $product->status ?>">
+                                    <div class="form-group">
+                                        <label class="col-md-12">Is active</label>
+                                        <div class="col-md-12">
+                                            <input type="checkbox" name="active" value="1" @checked($product->status)>
+                                        </div>
                                     </div>
-                                </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Description</label>
                                     <div class="col-md-12">
-                                        <input type="text" name="description"
+                                        <textarea type="text" name="description"
                                                class="form-control form-control-line"
-                                               value="<?= $product->description ?>">
+                                                  value="{{$product->description}}"></textarea>
                                     </div>
                                 </div>
 

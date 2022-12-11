@@ -42,49 +42,68 @@
                     <div class="card">
                         <div class="card-body">
                             <form class="form-horizontal form-material mx-2"
-                                  method="post" action="{{route('products.store')}}">
+                                  method="post" action="{{route('products.store')}}"
+                            enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <label class="col-md-12">Name</label>
                                     <div class="col-md-12">
                                         <input type="text" name="name"
-                                               class="form-control form-control-line">
+                                               class="form-control form-control-line @error('name') is-invalid @enderror"
+                                        value="{{old('name')}}">
                                     </div>
                                 </div>
+                                @error('name')
+                                    @foreach($errors->get('name') as $error)
+                                    <div class="alert alert-danger" role="alert">
+                                        {{$error}}
+                                    </div>
+                                    @endforeach
+                                @enderror
                                 <div class="form-group">
-                                    <label class="col-md-12">Category_id</label>
+                                    <label class="col-md-12">Category</label>
                                     <div class="col-md-12">
-                                        <input type="text" name="category_id"
-                                                class="form-control form-control-line">
+                                        <select name="category_id" class="form-control form-control-line">
+                                            @foreach($categories as $category)
+                                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Price</label>
                                     <div class="col-md-12">
                                         <input type="text" name="price"
-                                               class="form-control form-control-line">
+                                               class="form-control form-control-line"
+                                               value="{{old('price')}}">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Img</label>
                                     <div class="col-md-12">
                                         <input type="file" name="img"
-                                               class="form-control form-control-line">
+                                               class="form-control form-control-line @error('img') is-invalid @enderror">
                                     </div>
-
+                                    @error('img')
+                                        @foreach($errors->get('img') as $error)
+                                            <div class="alert alert-danger" role="alert">
+                                                {{$error}}
+                                            </div>
+                                        @endforeach
+                                    @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-12">Status</label>
-                                    <div class="col-md-12">
-                                        <input type="text" name="status"
-                                               class="form-control form-control-line">
+                                    <div class="form-group">
+                                        <label class="col-md-12">Is active</label>
+                                        <div class="col-md-12">
+                                            <input type="checkbox" name="status" value="1">
+                                        </div>
                                     </div>
-                                </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Description</label>
                                     <div class="col-md-12">
-                                        <input type="text" name="description"
-                                               class="form-control form-control-line">
+                                        <textarea type="text" name="description"
+                                               class="form-control form-control-line"></textarea>
                                     </div>
                                 </div>
 

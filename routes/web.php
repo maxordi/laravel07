@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\FirstController;
+use App\Http\Middleware\CheckIsAdmin;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,8 +21,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [FirstController::class, 'index']);
 
 
-Route::prefix('admin')->group(function (){
-    Route::get('/', [DashboardController::class, 'index']);
+Route::middleware(['auth', 'isAdmin'])->prefix('admin')->group(function (){
+    Route::get('/', [DashboardController::class, 'index'])
+    ->withoutMiddleware('isAdmin');
     Route::resource('categories', CategoryController::class)
     ->except('show');
     Route::resource('products', ProductController::class)

@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreProductRequest;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -16,7 +19,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = Product::query()->paginate(5);
+        $product = Product::query()->paginate(10);
         return view('admin.product.index', compact('product'));
     }
 
@@ -27,7 +30,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.product.create');
+        return view('admin.product.create',[
+            'categories' => Category::all()
+        ]);
     }
 
     /**
@@ -36,9 +41,15 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
-        $product = Product::create($request->all());
+        $data = $request->all();
+        if ($request->hasFile('img')){
+            $path = Storage::disk('public')
+                ->putFile('ololo', $request->file('img'));
+            $data['img'] = $path;
+        }
+       Product::create($data);
     }
 
     /**
@@ -60,8 +71,10 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        Product::find($product);
-        return view('admin.product.edit', compact('product'));
+        return view('admin.product.edit',[
+            'categories' => Category::all(),
+            'product' => $product
+        ]);
     }
 
     /**
@@ -73,7 +86,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $product->fill($request->all())->save();
     }
 
     /**
@@ -84,6 +97,6 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
     }
 }

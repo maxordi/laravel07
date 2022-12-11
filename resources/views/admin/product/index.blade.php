@@ -50,6 +50,7 @@
                                     <th class="border-top-0">Status</th>
                                     <th class="border-top-0">Description</th>
                                     <th class="border-top-0">Actions</th>
+                                    <th class="border-top-0">Delete</th>
 
                                 </tr>
                                 </thead>
@@ -65,6 +66,14 @@
                                     <td>{{$producted->description}}</td>
                                     <td>
                                         <a href="{{ route('products.edit', ['product'=> $producted->id]) }}" class="label label-danger">Edit</a>
+
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('products.destroy', ['product'=> $producted->id]) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="label label-danger">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach
