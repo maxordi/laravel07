@@ -2,9 +2,9 @@
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\FirstController;
+use App\Http\Controllers\User\MessageController;
 use App\Http\Middleware\CheckIsAdmin;
 use Illuminate\Support\Facades\Route;
 
@@ -28,9 +28,10 @@ Route::prefix('admin')->middleware('role:admin')->group(function (){
     ->except('show');
     Route::resource('products', ProductController::class)
         ->except('show');
+});
+Route::middleware('auth')->prefix('user')->group(function (){
     Route::resource('messages', MessageController::class)
-        ->except('show')
-        ->withoutMiddleware('isAdmin');
+    ->except('show');
 });
 //Route::get('/admin', [DashboardController::class, 'index']);
 
