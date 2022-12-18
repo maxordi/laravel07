@@ -21,9 +21,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [FirstController::class, 'index']);
 
 
-Route::middleware(['auth', 'isAdmin'])->prefix('admin')->group(function (){
-    Route::get('/', [DashboardController::class, 'index'])
-    ->withoutMiddleware('isAdmin');
+Route::prefix('admin')->middleware('role:admin')->group(function (){
+    Route::get('/', [DashboardController::class, 'index']);
     Route::resource('categories', CategoryController::class)
     ->except('show');
     Route::resource('products', ProductController::class)
