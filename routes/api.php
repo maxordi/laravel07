@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\MailController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
@@ -22,6 +23,8 @@ Route::post('login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/mails', [MailController::class, 'index']);
 
 Route::middleware([\App\Http\Middleware\ApiRequestMiddleware::class])->group(function (){
     Route::get('/users', [UserController::class, 'index']);
