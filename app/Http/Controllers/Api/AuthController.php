@@ -17,8 +17,6 @@ class AuthController extends Controller
         $user = User::where('email', $login)
             ->first();
         if (Hash::check($password, $user->password)){
-            $token = $user->createToken("API TOKEN")->plainTextToken;
-            Mail::send(new OrderShippedMail($token));
             return response()->json([
                 'token' => $user->createToken("API TOKEN")->plainTextToken
             ]);
