@@ -16,6 +16,7 @@ class NbrbBank implements ICurrencyInterface
 
     public function getAllCurrenciesOnDate(string $date)
     {
-        dump(2222);
+        dump(78890000);
+
     }
 }
